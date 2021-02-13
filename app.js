@@ -4,6 +4,7 @@ const galleryHeader = document.querySelector('.gallery-header');
 const searchBtn = document.getElementById('search-btn');
 const sliderBtn = document.getElementById('create-slider');
 const sliderContainer = document.getElementById('sliders');
+var searchBox= document.getElementById("search"); 
 // selected image 
 let sliders = [];
 
@@ -27,6 +28,12 @@ const showImages = (images) => {
   })
 
 }
+
+searchBox.addEventListener("keypress", function(event) {
+  if (event.key == "Enter"){
+      searchBtn.click();
+  }
+});
 
 const getImages = (query) => {
   fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
