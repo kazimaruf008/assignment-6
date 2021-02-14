@@ -4,8 +4,9 @@ const galleryHeader = document.querySelector('.gallery-header');
 const searchBtn = document.getElementById('search-btn');
 const sliderBtn = document.getElementById('create-slider');
 const sliderContainer = document.getElementById('sliders');
-var searchBox= document.getElementById("search"); 
+var searchBox = document.getElementById("search"); 
 const time = document.getElementById('duration');
+const spinner = document.getElementById("spinner")
 // selected image 
 let sliders = [];
 
@@ -27,7 +28,7 @@ const showImages = (images) => {
     div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
     gallery.appendChild(div)
   })
-
+  toggleSpinner()
 }
 
 searchBox.addEventListener("keypress", function(event) {
@@ -41,6 +42,7 @@ const getImages = (query) => {
     .then(response => response.json())
     .then(data => showImages(data.hits))
     .catch(err => console.log(err))
+    toggleSpinner()
 }
 
 let slideIndex = 0;
@@ -77,7 +79,6 @@ const createSlider = () => {
   imagesArea.style.display = 'none';
 
   const duration = parseFloat(time.value) || 1000;
-  console.log(duration)
   if (duration < 0) {
     alert('negative value not allow') 
     return;
@@ -135,3 +136,7 @@ searchBtn.addEventListener('click', function () {
 sliderBtn.addEventListener('click', function () {
   createSlider()
 })
+const toggleSpinner = () => {
+  const spinner = document.getElementById("spinner");
+  spinner.classList.toggle('d-none');
+}

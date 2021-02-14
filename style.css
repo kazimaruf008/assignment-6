@@ -5,7 +5,9 @@
   margin: 0 auto;
   position: relative;
 }
-
+.spinner{
+  margin-top: 50px;
+}
 .gallery-header {
   display: none;
 }
