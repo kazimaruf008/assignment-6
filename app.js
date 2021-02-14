@@ -5,6 +5,7 @@ const searchBtn = document.getElementById('search-btn');
 const sliderBtn = document.getElementById('create-slider');
 const sliderContainer = document.getElementById('sliders');
 var searchBox= document.getElementById("search"); 
+const time = document.getElementById('duration');
 // selected image 
 let sliders = [];
 
@@ -74,15 +75,22 @@ const createSlider = () => {
   document.querySelector('.main').style.display = 'block';
   // hide image aria
   imagesArea.style.display = 'none';
-  const duration = document.getElementById('duration').value || 1000;
-  sliders.forEach(slide => {
-    let item = document.createElement('div')
-    item.className = "slider-item";
-    item.innerHTML = `<img class="w-100"
-    src="${slide}"
-    alt="">`;
-    sliderContainer.appendChild(item)
-  })
+
+  const duration = parseFloat(time.value) || 1000;
+  console.log(duration)
+  if (duration < 0) {
+    alert('negative value not allow') 
+    return;
+  }else{
+    sliders.forEach(slide => {
+      let item = document.createElement('div')
+      item.className = "slider-item";
+      item.innerHTML = `<img class="w-100"
+      src="${slide}"
+      alt="">`;
+      sliderContainer.appendChild(item)
+    })
+  }
   changeSlide(0)
   timer = setInterval(function () {
     slideIndex++;
